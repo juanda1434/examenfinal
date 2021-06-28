@@ -20,7 +20,7 @@ import com.edu.ufps.examenfinal.util.Mail;
  * Servlet implementation class Usuario
  */
 @WebServlet({ "/Usuario", "/Registro","/Registro/enviar","/validarRegistro","/validarRegistro/enviar","/login" ,"/login/enviar",
-	"/registroTipo","/registroTipo/enviar"})
+	"/registroTipo","/registroTipo/enviar","","/","/index.jsp"})
 public class UsuarioC extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -50,7 +50,10 @@ public class UsuarioC extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path= request.getServletPath();
-		
+		if(path.equals("") || path.equals("/") ||path.contains("index.jsp")) {
+			response.sendRedirect(request.getContextPath()+"/login");
+			return;
+		}
 		switch(path) {
 		case "/Registro":
 			mostrarRegistro(request, response);
@@ -66,6 +69,12 @@ public class UsuarioC extends HttpServlet {
 			break;
 			
 		case"/login":
+			Usuario user=(Usuario)request.getSession().getAttribute("usuario");
+			if(user!=null) {
+				String direccion= user.getRol().getId()==1?"/registroTipo":"/inicio";
+				response.sendRedirect(request.getContextPath()+direccion);
+				return;
+			}
 			request.setAttribute("roles",rolDAO.list());
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			break;
@@ -73,7 +82,7 @@ public class UsuarioC extends HttpServlet {
 			login(request, response);
 			break;
 		case "/registroTipo":
-			if(request.getSession().getAttribute("usuario")==null && ((Usuario)request.getSession().getAttribute("usuario")).getRol().getId()!=1) {
+			if(request.getSession().getAttribute("usuario")==null || ((Usuario)request.getSession().getAttribute("usuario")).getRol().getId()!=1) {
 				response.sendRedirect(request.getContextPath()+"/login");
 				return;
 			}
@@ -98,7 +107,7 @@ public class UsuarioC extends HttpServlet {
 	}
 	
 	protected void registroTipo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession().getAttribute("usuario")==null && ((Usuario)request.getSession().getAttribute("usuario")).getRol().getId()!=1) {
+		if(request.getSession().getAttribute("usuario")==null || ((Usuario)request.getSession().getAttribute("usuario")).getRol().getId()!=1) {
 			response.sendRedirect(request.getContextPath()+"/login");
 			return;
 		}
