@@ -17,28 +17,38 @@ public class UsuarioDAO extends Conexion<Usuario> implements GenericDAO<Usuario>
 		super(Usuario.class);
 	}
 
-	
-		public Boolean logear(Usuario usuario) {
-			/*Boolean isLog=true;
-			Query query = null;
-			if(usuario.getAdministradors()!=null) {
-				query= getEm().createNamedQuery(Usuario.class.getSimpleName()+".logAdmin",Usuario.class);
-			}else if(usuario.getAdoptante()!=null) {
-				query= getEm().createNamedQuery(Usuario.class.getSimpleName()+".logAdoptante",Usuario.class);
-			}else if(usuario.getHogarDePaso()!=null) {
-				query= getEm().createNamedQuery(Usuario.class.getSimpleName()+".logHogar",Usuario.class);
-			}
+	public Usuario buscar(Usuario usuario ) {
+		Usuario logeado=null;
+		Query query = null;
+		query= getEm().createNamedQuery(Usuario.class.getSimpleName()+".log",Usuario.class);
+		
+		try {
+			query.setParameter("usuario", usuario.getUsuario());
+			query.setParameter("pass", usuario.getPass());
+			logeado=(Usuario)query.getSingleResult();
+		} catch (NoResultException e) {
 			
-			try {
-				query.setParameter("usuario", usuario.getUsuario());
-				query.setParameter("contrasenia", usuario.getContraseña());
-				query.getSingleResult();
-			} catch (NoResultException e) {
-				isLog=false;
-			}
-			
-			return isLog;*/
-			return false;
 		}
+		
+		return logeado;
+	}
+		
+	public Usuario log(Usuario usuario ) {
+		Usuario logeado=null;
+		Query query = null;
+		query= getEm().createNamedQuery(Usuario.class.getSimpleName()+".login",Usuario.class);
+		
+		try {
+			query.setParameter("usuario", usuario.getUsuario());
+			query.setParameter("pass", usuario.getPass());
+			query.setParameter("rol", usuario.getRol().getId());
+			logeado=(Usuario)query.getSingleResult();
+		} catch (NoResultException e) {
+			
+		}
+		
+		return logeado;
+	}
+	
 
 }

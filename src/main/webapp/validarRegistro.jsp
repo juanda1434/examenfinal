@@ -14,7 +14,7 @@
             <header>
                 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
                     <div>
-                        <a href="https://www.javaguides.net" class="navbar-brand"> Registro usuarios </a>
+                        <a href="https://www.javaguides.net" class="navbar-brand"> Validar registro usuarios </a>
                     </div>
 
                     <ul class="navbar-nav">
@@ -28,19 +28,18 @@
                     <div class="card-body">
 
                    
-                            <form action="<%=request.getContextPath()%>/Registro/enviar" method="post">
+                            <form action="<%=request.getContextPath()%>/validarRegistro/enviar" method="post">
                        
                        
 
                         <caption>
                             <h2>                            
                               
-                                    Agregar nuevo usuario
+                                   Validar Registro
                                
                             </h2>
                         </caption>
 
-                       
                     
 
                         <fieldset class="form-group">
@@ -48,18 +47,14 @@
                         </fieldset>
 
                         <fieldset class="form-group">
-                            <label>Email</label> <input type="text" value="" class="form-control" name="email">
-                        </fieldset>
-
-                        <fieldset class="form-group">
                             <label>Contrasenia</label> <input type="password" value="" class="form-control" name="contrasenia">
                         </fieldset>
 
-                        <button type="submit" class="btn btn-success">registrar</button>
+                        <button type="submit" class="btn btn-success">Validar</button>
                         </form>
-                       <%if(request.getParameter("registro")!=null){
+                           <%if(request.getParameter("validar")!=null){
                     	   
-                    	   out.append("<h2>"+request.getParameter("registro")+"</h2>");
+                    	   out.append("<h2>"+request.getParameter("validar")+"</h2>");
                        }
 
 %>

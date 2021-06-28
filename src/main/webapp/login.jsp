@@ -14,7 +14,7 @@
             <header>
                 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
                     <div>
-                        <a href="https://www.javaguides.net" class="navbar-brand"> Registro usuarios </a>
+                        <a href="https://www.javaguides.net" class="navbar-brand"> Login usuarios </a>
                     </div>
 
                     <ul class="navbar-nav">
@@ -28,38 +28,53 @@
                     <div class="card-body">
 
                    
-                            <form action="<%=request.getContextPath()%>/Registro/enviar" method="post">
+                            <form action="<%=request.getContextPath()%>/login/enviar" method="post">
                        
                        
 
                         <caption>
                             <h2>                            
                               
-                                    Agregar nuevo usuario
+                                   Login
                                
                             </h2>
                         </caption>
 
-                       
                     
 
                         <fieldset class="form-group">
                             <label>Usuario</label> <input type="text" value="" class="form-control" name="usuario" required="required">
                         </fieldset>
 
-                        <fieldset class="form-group">
-                            <label>Email</label> <input type="text" value="" class="form-control" name="email">
+						
+<fieldset class="form-group">
+						 <label>Rol</label>
+                            <select class="form-control" name="rol">
+                                <%
+                               	List<Rol> roles = (List<Rol>)request.getAttribute("roles");
+                                if(roles==null){
+                                	response.sendRedirect("/");
+                                }
+                                for(Rol rol : roles){
+                                %>
+                                <option value="<%=rol.getId()%>"><%=rol.getDescription() %></option>
+                                <%
+                                }
+                                %>
+                                </select>
+                            
+                            
                         </fieldset>
-
                         <fieldset class="form-group">
                             <label>Contrasenia</label> <input type="password" value="" class="form-control" name="contrasenia">
                         </fieldset>
+                        
 
-                        <button type="submit" class="btn btn-success">registrar</button>
+                        <button type="submit" class="btn btn-success">Login</button>
                         </form>
-                       <%if(request.getParameter("registro")!=null){
+                           <%if(request.getParameter("validar")!=null){
                     	   
-                    	   out.append("<h2>"+request.getParameter("registro")+"</h2>");
+                    	   out.append("<h2>"+request.getParameter("validar")+"</h2>");
                        }
 
 %>
@@ -68,3 +83,4 @@
             </div>
         </body>
 </html>
+

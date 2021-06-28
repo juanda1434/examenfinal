@@ -10,7 +10,10 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
+@NamedQueries({
+@NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u"),
+@NamedQuery(name="Usuario.log", query="SELECT u FROM Usuario u where u.usuario =:usuario and u.pass=:pass "),
+@NamedQuery(name="Usuario.login", query="SELECT u FROM Usuario u join u.rol r where u.usuario =:usuario and u.pass=:pass and r.id=:rol and u.state=1 ")})
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -18,33 +21,14 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	private String clave;
-
-	private String contrasenia;
-
-	private String contraseña;
 
 	private String email;
 
-	private String hash;
-
-	private int idtipousuario;
-
-	private int idusuario;
-
-	private int idUsuario;
-
-	private String nombre;
-
-	private String nombreUsuario;
-
-	private String pais;
 
 	private String pass;
 
 	private short state;
 
-	private String tipoUsuario;
 
 	private String usuario;
 
@@ -68,29 +52,9 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public String getClave() {
-		return this.clave;
-	}
 
-	public void setClave(String clave) {
-		this.clave = clave;
-	}
 
-	public String getContrasenia() {
-		return this.contrasenia;
-	}
 
-	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
-	}
-
-	public String getContraseña() {
-		return this.contraseña;
-	}
-
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
-	}
 
 	public String getEmail() {
 		return this.email;
@@ -100,61 +64,12 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
-	public String getHash() {
-		return this.hash;
-	}
 
-	public void setHash(String hash) {
-		this.hash = hash;
-	}
 
-	public int getIdtipousuario() {
-		return this.idtipousuario;
-	}
 
-	public void setIdtipousuario(int idtipousuario) {
-		this.idtipousuario = idtipousuario;
-	}
 
-	public int getIdusuario() {
-		return this.idusuario;
-	}
 
-	public void setIdusuario(int idusuario) {
-		this.idusuario = idusuario;
-	}
-
-	public int getIdUsuario() {
-		return this.idUsuario;
-	}
-
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getNombreUsuario() {
-		return this.nombreUsuario;
-	}
-
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
-
-	public String getPais() {
-		return this.pais;
-	}
-
-	public void setPais(String pais) {
-		this.pais = pais;
-	}
+	
 
 	public String getPass() {
 		return this.pass;
@@ -172,13 +87,7 @@ public class Usuario implements Serializable {
 		this.state = state;
 	}
 
-	public String getTipoUsuario() {
-		return this.tipoUsuario;
-	}
 
-	public void setTipoUsuario(String tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
-	}
 
 	public String getUsuario() {
 		return this.usuario;

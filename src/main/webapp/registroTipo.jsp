@@ -28,7 +28,7 @@
                     <div class="card-body">
 
                    
-                            <form action="<%=request.getContextPath()%>/Registro/enviar" method="post">
+                            <form action="<%=request.getContextPath()%>/registroTipo/enviar" method="post">
                        
                        
 
@@ -44,17 +44,20 @@
                     
 
                         <fieldset class="form-group">
-                            <label>Usuario</label> <input type="text" value="" class="form-control" name="usuario" required="required">
+                            <label>id</label> <input type="text" value="" class="form-control" name="id" required="required">
                         </fieldset>
 
                         <fieldset class="form-group">
-                            <label>Email</label> <input type="text" value="" class="form-control" name="email">
+                            <label>descripcion</label> <input type="text" value="" class="form-control" name="descripcion">
                         </fieldset>
 
                         <fieldset class="form-group">
-                            <label>Contrasenia</label> <input type="password" value="" class="form-control" name="contrasenia">
+                            <label>driver</label> <input type="text" value="" class="form-control" name="driver">
                         </fieldset>
 
+						<fieldset class="form-group">
+                            <label>adicional</label> <input type="text" value="" class="form-control" name="adicional">
+                        </fieldset>
                         <button type="submit" class="btn btn-success">registrar</button>
                         </form>
                        <%if(request.getParameter("registro")!=null){
