@@ -49,7 +49,7 @@ public abstract class Conexion <T> {
 		return c;
 	} 
 	
-	public void insert(T obj){
+	public void insert(T obj){ 
 		try {
 			em.getTransaction().begin();
 			em.persist(obj);
