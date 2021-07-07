@@ -27,7 +27,7 @@ public class Mail{
         // creates a new session with an authenticator
         Authenticator auth = new Authenticator() {
             public PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("palo1493@gmail.com", "d9a1oo30");
+                return new PasswordAuthentication("correoGmailEnvia", "contrasena");
             }
         };
  
@@ -37,7 +37,7 @@ public class Mail{
         Message msg = new MimeMessage(session);
  
       try {
-    	  msg.setFrom(new InternetAddress("palo1493@gmail.com"));
+    	  msg.setFrom(new InternetAddress("correoGmailEnvia"));
           InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
           msg.setRecipients(Message.RecipientType.TO, toAddresses);
           msg.setSubject(asunto);
